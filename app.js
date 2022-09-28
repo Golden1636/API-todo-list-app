@@ -40,7 +40,7 @@ const generateTemplate = function (todos) {
 };
 
 const getTodos = async () => {
-  const res = await fetch('http://jsonplaceholder.typicode.com/todos');
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos');
   const todos = await res.json();
   // console.log(todos);
   generateTemplate(todos);
@@ -50,10 +50,10 @@ getTodos();
 
 const deleteTodo = async function () {
   console.log(deleteId.id);
-  await fetch(`http://jsonplaceholder.typicode.com/todos/1`, {
+  toggleDeleteModal();
+  await fetch(`https://jsonplaceholder.typicode.com/todos/1`, {
     method: 'DELETE',
   });
-  toggleDeleteModal();
   getTodos();
 };
 
@@ -65,7 +65,7 @@ const toggleDeleteModal = i => {
 
 const addTodo = async function () {
   const title = addForm.add.value.trim();
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos', {
     method: 'POST',
     body: JSON.stringify({
       title,
@@ -97,7 +97,7 @@ addForm.addEventListener('submit', e => {
 const showEditModal = i => {
   popup.style.display = 'block';
   (async () => {
-    const res = await fetch('http://jsonplaceholder.typicode.com/todos');
+    const res = await fetch('https://jsonplaceholder.typicode.com/todos');
     const todos = await res.json();
     todos.forEach(todo => {
       if (todo.id === i) {
